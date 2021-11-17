@@ -333,4 +333,11 @@ contract Billionaire is ERC721Enumerable, Pausable, PaymentSplitter {
         }
         return _status;
     }
+    
+    function withdrawAll() external onlyOwner {
+        for (uint256 i = 0; i < _team.length; i++) {
+            address payable wallet = payable(_team[i]);
+            release(wallet);
+        }
+    }
 }
